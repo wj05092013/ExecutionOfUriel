@@ -23,3 +23,8 @@
 
 * 주 개발 언어: C++, 언리얼 블루프린트
 * 개발 환경: 언리얼 엔진(ver. 4.24), VC++(Visual Studio 2019)
+
+## 주의 사항
+
+* 모든 애셋 파일은 구글 드라이브에서 따로 다운받아야 한다.
+* https://drive.google.com/drive/folders/1NKz0Ldb4Rhq5a409ueNI0CI18EhWSEue
