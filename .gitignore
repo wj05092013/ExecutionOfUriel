@@ -74,4 +74,4 @@ Plugins/*/Intermediate/*
 DerivedDataCache/*
 
 # Download all assets from google drive: https://drive.google.com/drive/folders/1NKz0Ldb4Rhq5a409ueNI0CI18EhWSEue
-*.uasset
+Content/
