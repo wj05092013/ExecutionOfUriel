@@ -26,7 +26,6 @@ public:
 
 	void SetDead() { bIsDead = true; }
 
-	void PlayDeathMontage();
 	const UAnimMontage* GetDeadMontage() const { return DeathMontage; }
 
 protected:

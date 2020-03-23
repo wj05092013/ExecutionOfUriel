@@ -75,7 +75,6 @@ void AEUCharacter::OnDead()
 	SetActorEnableCollision(false);
 
 	Anim->SetDead();
-	Anim->PlayDeathMontage();
 
 	CharacterInfoWidget->SetVisibility(false);
 

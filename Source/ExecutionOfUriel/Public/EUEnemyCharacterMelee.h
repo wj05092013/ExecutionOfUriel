@@ -20,6 +20,6 @@ public:
 	virtual void OnAttack() override;
 
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attack, Meta = (ClampMin = 0.0))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat, Meta = (ClampMin = 0.0))
 	float AttackRangeHalfWidth;
 };

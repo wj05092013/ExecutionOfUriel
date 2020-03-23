@@ -25,19 +25,11 @@ void UEUCharacterAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	AimRotation = (EUCharacter->GetBaseAimRotation() - EUCharacter->GetActorRotation()).GetNormalized();
 }
 
-void UEUCharacterAnimInstance::PlayDeathMontage()
-{
-	EUCHECK(DeathMontage != nullptr);
-	EUCHECK(bIsDead);
-
-	Montage_Play(DeathMontage);
-}
-
 void UEUCharacterAnimInstance::PlayAttackMontage()
 {
 	EUCHECK(AttackMontage != nullptr);
 	EUCHECK(!bIsDead);
-
+	EULOG_S(Warning);
 	Montage_Play(AttackMontage);
 }
 
