@@ -26,5 +26,6 @@
 
 ## 주의 사항
 
-* 모든 애셋 파일은 구글 드라이브에서 따로 다운받아야 한다.
 * https://drive.google.com/drive/folders/1NKz0Ldb4Rhq5a409ueNI0CI18EhWSEue
+* 모든 애셋 파일은 위의 구글 드라이브에서 따로 다운받아야 한다.
+* Content 폴더 다운로드 후, 프로젝트에 추가
