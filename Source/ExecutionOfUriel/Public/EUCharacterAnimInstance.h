@@ -26,13 +26,6 @@ public:
 
 	void SetDead() { bIsDead = true; }
 
-	const UAnimMontage* GetDeadMontage() const { return DeathMontage; }
-
-protected:
-	// This property has to be set on derived class' constructor.
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Death)
-	UAnimMontage* DeathMontage;
-
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Pawn, Meta = (AllowPrivateAccess = true))
 	bool bIsDead;

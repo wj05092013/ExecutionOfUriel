@@ -43,7 +43,9 @@ AEUPhaseCharacter::AEUPhaseCharacter()
 	AttackRangeDepth = 2000.0f;
 	TargetingRadius = 10.0f;
 
-	ProjectileClass = AEUProjectile::StaticClass();
+	static ConstructorHelpers::FClassFinder<AActor> BASIC_ATTACK_PROJECTILE(TEXT("/Game/ExecutionOfUriel/Blueprints/BP_PlayerBasicAttackProjectile.BP_PlayerBasicAttackProjectile_C"));
+	EUCHECK(BASIC_ATTACK_PROJECTILE.Succeeded());
+	BasicAttackProjectileClass = BASIC_ATTACK_PROJECTILE.Class;
 
 	// Effect settings
 	//
@@ -68,7 +70,7 @@ void AEUPhaseCharacter::OnAttack()
 {
 	Super::OnAttack();
 
-	EUCHECK(ProjectileClass != nullptr);
+	EUCHECK(BasicAttackProjectileClass != nullptr);
 
 	// -----------------------------------------------------------------------------
 	// 타겟 탐색 (뷰 공간의 X축 방향 오브젝트 Picking)
@@ -137,7 +139,7 @@ void AEUPhaseCharacter::OnAttack()
 	SpawnParam.Owner = this;
 
 	// AEUProjectile 클래스 정보를 통해 객체 스폰
-	AEUProjectile* Projectile = GetWorld()->SpawnActor<AEUProjectile>(ProjectileClass, SpawnLocation, GetActorRotation(), SpawnParam);
+	AEUProjectile* Projectile = GetWorld()->SpawnActor<AEUProjectile>(BasicAttackProjectileClass, SpawnLocation, GetActorRotation(), SpawnParam);
 	if (Projectile != nullptr)
 	{
 		ShootDirection.Normalize();

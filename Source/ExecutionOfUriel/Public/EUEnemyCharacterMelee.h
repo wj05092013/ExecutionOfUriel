@@ -17,6 +17,9 @@ class EXECUTIONOFURIEL_API AEUEnemyCharacterMelee : public AEUEnemyCharacter
 public:
 	AEUEnemyCharacterMelee();
 
+	// =============================================================================
+	// Combat
+
 	virtual void OnAttack() override;
 
 protected:

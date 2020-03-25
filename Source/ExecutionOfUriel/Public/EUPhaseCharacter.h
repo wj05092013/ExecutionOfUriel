@@ -36,5 +36,5 @@ private:
 	float TargetingRadius;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Combat, Meta = (AllowPrivateAccess = true))
-	TSubclassOf<class AEUProjectile> ProjectileClass;
+	TSubclassOf<class AEUProjectile> BasicAttackProjectileClass;
 };

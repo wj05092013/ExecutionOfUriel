@@ -14,7 +14,7 @@ const FName AEUEnemyAIController::TargetKey(TEXT("Target"));
 
 const float AEUEnemyAIController::PatrolRadius = 500.0f;
 const float AEUEnemyAIController::DetectRadius = 1000.0f;
-const float AEUEnemyAIController::ChaseRadius = 2000.0f;
+const float AEUEnemyAIController::ChaseRadius = 1500.0f;
 
 AEUEnemyAIController::AEUEnemyAIController()
 {
@@ -54,4 +54,12 @@ void AEUEnemyAIController::HitBy(AEUCharacter* Attacker)
 {
 	EUCHECK(Attacker != nullptr);
 	Blackboard->SetValueAsObject(TargetKey, Attacker);
+}
+
+AEUCharacter* AEUEnemyAIController::GetTarget()
+{
+	auto Target = Cast<AEUCharacter>(Blackboard->GetValueAsObject(TargetKey));
+	EUCHECK(Target != nullptr, nullptr);
+
+	return Target;
 }

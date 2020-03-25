@@ -65,9 +65,5 @@ void UBTService_Detect::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeM
 		}
 
 		OwnerComp.GetBlackboardComponent()->SetValueAsObject(AEUEnemyAIController::TargetKey, TargetCharacter);
-		/*if (TargetCharacter != nullptr)
-			DrawDebugSphere(ControllingPawn->GetWorld(), Pos, AEUEnemyAIController::DetectRadius, 16, FColor::Green, false, 0.2f);
-		else
-			DrawDebugSphere(ControllingPawn->GetWorld(), Pos, AEUEnemyAIController::DetectRadius, 16, FColor::Red, false, 0.2f);*/
 	}
 }

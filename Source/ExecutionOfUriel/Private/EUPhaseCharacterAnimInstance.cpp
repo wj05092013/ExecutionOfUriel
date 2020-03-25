@@ -17,11 +17,4 @@ UEUPhaseCharacterAnimInstance::UEUPhaseCharacterAnimInstance()
 	AttackMontageSectionNames.Add(FName(TEXT("Attack_B")));
 	AttackMontageSectionNames.Add(FName(TEXT("Attack_C")));
 	AttackMontageSectionNames.Add(FName(TEXT("Attack_D")));
-
-	// Death montage
-	//
-
-	static ConstructorHelpers::FObjectFinder<UAnimMontage> DEATH_MONTAGE(TEXT("/Game/ExecutionOfUriel/Animations/Phase_Death_Montage.Phase_Death_Montage"));
-	EUCHECK(DEATH_MONTAGE.Succeeded());
-	DeathMontage = DEATH_MONTAGE.Object;
 }

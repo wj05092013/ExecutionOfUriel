@@ -101,10 +101,6 @@ void AEUCharacter::OnMontageEnded(UAnimMontage* Montage, bool bInterrupted)
 	{
 		OnAttackEnd.Broadcast();
 	}
-	else if (Montage == Anim->GetDeadMontage())
-	{
-		// **! Add later (Ragdoll)
-	}
 }
 
 float AEUCharacter::TakeDamage(float DamageAmount, const FDamageEvent& DamageEvent, AController* EventInstigator, AActor* DamageCauser)

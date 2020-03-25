@@ -51,7 +51,7 @@ public:
 
 	virtual float TakeDamage(float DamageAmount, const FDamageEvent& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
-private:
-	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))
+protected:
+	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = Combat)
 	bool bIsAttacking;
 };

@@ -20,6 +20,7 @@ public:
 	void RunAI();
 	void StopAI();
 	void HitBy(class AEUCharacter* Attacker);
+	class AEUCharacter* GetTarget();
 
 	static const FName HomePosKey;
 	static const FName PatrolPosKey;
