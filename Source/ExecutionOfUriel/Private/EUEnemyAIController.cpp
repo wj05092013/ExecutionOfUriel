@@ -11,6 +11,7 @@ const FName AEUEnemyAIController::HomePosKey(TEXT("HomePos"));
 const FName AEUEnemyAIController::PatrolPosKey(TEXT("PatrolPos"));
 const FName AEUEnemyAIController::PatrolRadiusKey(TEXT("PatrolRadius"));
 const FName AEUEnemyAIController::TargetKey(TEXT("Target"));
+const FName AEUEnemyAIController::IsInAttackRangeKey(TEXT("IsInAttackRange"));
 
 const float AEUEnemyAIController::PatrolRadius = 500.0f;
 const float AEUEnemyAIController::DetectRadius = 1000.0f;

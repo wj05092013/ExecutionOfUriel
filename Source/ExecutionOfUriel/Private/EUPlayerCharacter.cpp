@@ -50,7 +50,7 @@ AEUPlayerCharacter::AEUPlayerCharacter()
 	// Collision settings
 	//
 
-	GetCapsuleComponent()->SetCollisionProfileName(TEXT("EUPlayerCharacter"));
+	GetCapsuleComponent()->SetCollisionProfileName(TEXT("PlayerCharacter"));
 
 	// Combat settings
 	bIsAttacking = false;

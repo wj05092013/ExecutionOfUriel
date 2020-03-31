@@ -106,14 +106,14 @@ void AEUPhaseCharacter::OnAttack()
 
 	FVector SpawnLocation;
 	// 타겟이 존재하지 않으면 마법구는 캐릭터 전방 직선으로 날아간다.
-	FVector ShootDirection(1.0f, 0.0f, 0.0f);
+	FVector FireDirection(1.0f, 0.0f, 0.0f);
 
 	// 타겟이 존재하면 마법구는 곡선을 그리며 날아간다.
 	if (TargetComp != nullptr)
 	{
 		// X축을 중심으로 한 원 위에서, 중심 각이 30도인 호의 임의의 점을 반환한다.
 		FVector2D RandVec = FEUMath::RandPointInUnitArcAroundX(30.0f);
-		ShootDirection = FVector(2.0f, RandVec.X, RandVec.Y);
+		FireDirection = FVector(2.0f, RandVec.X, RandVec.Y);
 	}
 
 	// 마법구 발사 위치를 왼손으로 설정
@@ -122,7 +122,7 @@ void AEUPhaseCharacter::OnAttack()
 		LeftHandFlashEffect->Activate(true);
 		SpawnLocation = GetMesh()->GetSocketLocation(LeftHandSocketName) + 10.0f * GetActorForwardVector();
 		// 오른손 발사가 기본이므로, 발사 방향의 Y값을 반전시킨다.
-		ShootDirection.Y = -ShootDirection.Y;
+		FireDirection.Y = -FireDirection.Y;
 	}
 	// 마법구 발사 위치를 오른손으로 설정
 	else
@@ -142,8 +142,8 @@ void AEUPhaseCharacter::OnAttack()
 	AEUProjectile* Projectile = GetWorld()->SpawnActor<AEUProjectile>(BasicAttackProjectileClass, SpawnLocation, GetActorRotation(), SpawnParam);
 	if (Projectile != nullptr)
 	{
-		ShootDirection.Normalize();
+		FireDirection.Normalize();
 		// 실제 마법구의 발사를 수행한다.
-		Projectile->Fire(GetActorRotation().RotateVector(ShootDirection), TargetComp, CharacterStatus->GetMagic());
+		Projectile->Fire(GetActorRotation().RotateVector(FireDirection), TargetComp, CharacterStatus->GetMagic());
 	}
 }

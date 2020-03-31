@@ -2,7 +2,7 @@
 
 
 #include "EUProjectile.h"
-#include "EUEnemyCharacter.h"
+#include "EUCharacter.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 
 AEUProjectile::AEUProjectile()
@@ -16,41 +16,17 @@ AEUProjectile::AEUProjectile()
 	Collision = CreateDefaultSubobject<USphereComponent>(TEXT("Sphere"));
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovement"));
 	FlyingEffect = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("FlyingEffect"));
-	ExplosionEffect = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("ExplosionEffect"));
+	HitEffect = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("HitEffect"));
 
 	RootComponent = Collision;
 	FlyingEffect->SetupAttachment(RootComponent);
-	ExplosionEffect->SetupAttachment(RootComponent);
-
-	Collision->SetCollisionProfileName(TEXT("CharacterSkill"));
+	HitEffect->SetupAttachment(RootComponent);
 	
-	Collision->SetSphereRadius(15.0f);
-
-	// Movement settings
-	//
-
-	ProjectileMovement->InitialSpeed = 2000.0f;
-	ProjectileMovement->MaxSpeed = 4000.0f;
-	ProjectileMovement->bRotationFollowsVelocity = true;
-	ProjectileMovement->bShouldBounce = false;
-	ProjectileMovement->bForceSubStepping = false;
-	ProjectileMovement->ProjectileGravityScale = 0.0f;
-	
-
 	// Effect settings
 	//
 
-	static ConstructorHelpers::FObjectFinder<UParticleSystem> P_FLYING(TEXT("/Game/FXVarietyPack/Particles/P_ky_waterBall.P_ky_waterBall"));
-	EUCHECK(P_FLYING.Succeeded());
-
-	FlyingEffect->SetTemplate(P_FLYING.Object);
 	FlyingEffect->bAutoActivate = true;
-
-	static ConstructorHelpers::FObjectFinder<UParticleSystem> P_EXPLOSION(TEXT("/Game/FXVarietyPack/Particles/P_ky_waterBallHit.P_ky_waterBallHit"));
-	EUCHECK(P_EXPLOSION.Succeeded());
-
-	ExplosionEffect->SetTemplate(P_EXPLOSION.Object);
-	ExplosionEffect->bAutoActivate = false;
+	HitEffect->bAutoActivate = false;
 
 	bSetDestroy = false;
 }
@@ -75,7 +51,7 @@ void AEUProjectile::Tick(float DeltaTime)
 	
 	auto OwnerCharacter = Cast<AEUCharacter>(GetOwner());
 	EUCHECK(OwnerCharacter != nullptr);
-	if (FVector::Dist(StartPos, GetActorLocation()) > OwnerCharacter->GetAttackRange())
+	if (FVector::Dist(StartPos, GetActorLocation()) > OwnerCharacter->GetAttackRangeDepth())
 		StartDestroy();
 }
 
@@ -89,7 +65,6 @@ void AEUProjectile::Fire(const FVector& ShootDirection, TWeakObjectPtr<USceneCom
 	{
 		ProjectileMovement->bIsHomingProjectile = true;
 		ProjectileMovement->HomingTargetComponent = TargetComp;
-		ProjectileMovement->HomingAccelerationMagnitude = 50000.0f;
 	}
 }
 
@@ -98,8 +73,8 @@ void AEUProjectile::OnEnemyCharacterOverlap(UPrimitiveComponent* OverlappedComp,
 	// Something is on the way of this object, then destroy this.
 	StartDestroy();
 
-	auto Enemy = Cast<AEUEnemyCharacter>(OtherActor);
-	if (Enemy != nullptr)
+	auto VictimCharacter = Cast<AEUCharacter>(OtherActor);
+	if (VictimCharacter != nullptr)
 	{
 		// Apply damage to the victim.
 		//
@@ -111,13 +86,13 @@ void AEUProjectile::OnEnemyCharacterOverlap(UPrimitiveComponent* OverlappedComp,
 		EUCHECK(Controller != nullptr);
 
 		FDamageEvent DamageEvent;
-		OtherActor->TakeDamage(Damage, DamageEvent, Controller, this);
+		VictimCharacter->TakeDamage(Damage, DamageEvent, Controller, this);
 	}
 }
 
 void AEUProjectile::OnExplosionEffectFinished(UParticleSystemComponent* ParticleSystem)
 {
-	ExplosionEffect->Deactivate();
+	HitEffect->Deactivate();
 	Destroy();
 }
 
@@ -130,8 +105,8 @@ void AEUProjectile::StartDestroy()
 	ProjectileMovement->Deactivate();
 
 	FlyingEffect->Deactivate();
-	ExplosionEffect->Activate();
-	ExplosionEffect->OnSystemFinished.AddDynamic(this, &AEUProjectile::OnExplosionEffectFinished);
+	HitEffect->Activate();
+	HitEffect->OnSystemFinished.AddDynamic(this, &AEUProjectile::OnExplosionEffectFinished);
 
 	bSetDestroy = true;
 }

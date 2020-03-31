@@ -26,6 +26,7 @@ public:
 	static const FName PatrolPosKey;
 	static const FName PatrolRadiusKey;
 	static const FName TargetKey;
+	static const FName IsInAttackRangeKey;
 
 	static const float PatrolRadius;
 	static const float DetectRadius;

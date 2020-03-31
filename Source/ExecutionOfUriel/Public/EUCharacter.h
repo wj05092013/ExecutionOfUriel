@@ -83,7 +83,7 @@ public:
 
 	virtual float TakeDamage(float DamageAmount, const FDamageEvent& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
-	float GetAttackRange() const;
+	float GetAttackRangeDepth() const;
 
 	FOnAttackEndDelegate OnAttackEnd;
 

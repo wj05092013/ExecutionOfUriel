@@ -29,7 +29,7 @@ void UEUCharacterAnimInstance::PlayAttackMontage()
 {
 	EUCHECK(AttackMontage != nullptr);
 	EUCHECK(!bIsDead);
-	EULOG_S(Warning);
+	
 	Montage_Play(AttackMontage);
 }
 

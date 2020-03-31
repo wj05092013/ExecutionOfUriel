@@ -3,6 +3,8 @@
 
 #include "EUEnemyCharacterRanged.h"
 #include "EUEnemyAIController.h"
+#include "EUProjectile.h"
+#include "EUCharacterStatusComponent.h"
 
 AEUEnemyCharacterRanged::AEUEnemyCharacterRanged()
 {
@@ -24,7 +26,8 @@ void AEUEnemyCharacterRanged::Attack()
 		auto Target = AIController->GetTarget();
 		EUCHECK(Target != nullptr);
 
-		FireDirection = Target->GetActorLocation() - GetActorLocation();
+		FireDirection = Target->GetMesh()->GetCenterOfMass() - GetMesh()->GetSocketLocation(ProjectileSpawningSocketName);
+		FireDirection.Normalize();
 	}
 	else
 	{
@@ -34,4 +37,18 @@ void AEUEnemyCharacterRanged::Attack()
 
 void AEUEnemyCharacterRanged::OnAttack()
 {
+	Super::OnAttack();
+
+	EUCHECK(ProjectileClass != nullptr);
+
+	FVector SpawnLocation = GetMesh()->GetSocketLocation(ProjectileSpawningSocketName);
+
+	FActorSpawnParameters SpawnParam;
+	SpawnParam.Owner = this;
+
+	auto Projectile = GetWorld()->SpawnActor<AEUProjectile>(ProjectileClass, SpawnLocation, GetActorRotation(), SpawnParam);
+	if (Projectile != nullptr)
+	{
+		Projectile->Fire(FireDirection, nullptr, CharacterStatus->GetMagic());
+	}
 }

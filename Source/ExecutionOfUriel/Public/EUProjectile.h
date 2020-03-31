@@ -44,7 +44,7 @@ public:
 	UParticleSystemComponent* FlyingEffect;
 
 	UPROPERTY(VisibleAnywhere, Category = Effect)
-	UParticleSystemComponent* ExplosionEffect;
+	UParticleSystemComponent* HitEffect;
 
 private:
 	FVector StartPos;

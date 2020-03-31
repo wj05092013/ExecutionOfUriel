@@ -24,6 +24,12 @@ public:
 	virtual void OnAttack() override;
 
 private:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Combat, Meta = (AllowPrivateAccess = true))
+	TSubclassOf<class AEUProjectile> ProjectileClass;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Combat, Meta = (AllowPrivateAccess = true))
+	FName ProjectileSpawningSocketName;
+
 	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = Combat, Meta = (AllowPrivateAccess = true))
 	FVector FireDirection;
 

@@ -21,7 +21,7 @@ AEUEnemyCharacter::AEUEnemyCharacter()
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 300.0f, 0.0f);
 
 	// Collision settings
-	GetCapsuleComponent()->SetCollisionProfileName(TEXT("EUEnemyCharacter"));
+	GetCapsuleComponent()->SetCollisionProfileName(TEXT("EnemyCharacter"));
 
 	// Status settings
 	Level = 1;

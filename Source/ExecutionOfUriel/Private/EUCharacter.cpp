@@ -115,7 +115,7 @@ float AEUCharacter::TakeDamage(float DamageAmount, const FDamageEvent& DamageEve
 	return FinalDamage;
 }
 
-float AEUCharacter::GetAttackRange() const
+float AEUCharacter::GetAttackRangeDepth() const
 {
 	return AttackRangeDepth;
 }
