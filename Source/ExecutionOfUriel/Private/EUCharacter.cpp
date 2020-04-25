@@ -109,7 +109,7 @@ float AEUCharacter::TakeDamage(float DamageAmount, const FDamageEvent& DamageEve
 	
 	Attacker = EventInstigator;
 	CharacterStatus->AdjustHP(-FinalDamage);
-
+	Anim->HitBy(DamageCauser);
 	SpawnDamageWidget(FinalDamage);
 
 	return FinalDamage;
